@@ -45,10 +45,10 @@ int main() {
         cin >> c;
         arr.push_back(c);
     }
-    cout << "Original vector: ";
+    cout << "Original array: ";
     printVector(arr);
     radixSortLSD(arr);
-    cout << "Sorted vector: ";
+    cout << "Sorted array: ";
     printVector(arr);
     return 0;
 }
