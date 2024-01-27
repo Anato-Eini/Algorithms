@@ -1,73 +1,41 @@
 #include <iostream>
 using namespace std;
-// Function to print an array
-void printArray(int arr[], int n) {
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
+
+void printArray(int array[], int size){
+    for(int i = 0; i < size; i++)
+        cout << array[i] << ' ';
+    cout << '\n';
 }
 
-// Function to merge two sorted subarrays
-void merge(int arr[], int left, int mid, int right) {
-    int i, j, k;
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+void mergeArrays(int array[], int left, int mid, int right){
+    int leftSize = mid - left + 1, rightSize = right - mid, leftArray[leftSize], rightArray[rightSize],
+        leftIndex = 0, rightIndex = 0, arrayIndex = 0;
 
-    // Create temporary arrays
-    int L[n1], R[n2];
+    for(int i = 0; i < leftSize; i++)
+        leftArray[i] = array[left + i];
+    for(int i = 0; i < rightSize; i++)
+        rightArray[i] = array[mid + 1 + i];
 
-    // Copy data to temporary arrays
-    for (i = 0; i < n1; i++) {
-        L[i] = arr[left + i];
-    }
-    for (j = 0; j < n2; j++) {
-        R[j] = arr[mid + 1 + j];
-    }
-
-    // Merge the temporary arrays back into arr[left..right]
-    i = 0;  // Initial index of first subarray
-    j = 0;  // Initial index of second subarray
-    k = left;  // Initial index of merged subarray
-
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            i++;
-        } else {
-            arr[k] = R[j];
-            j++;
-        }
-        k++;
+    while(leftIndex < leftSize && rightIndex < rightSize){
+        if(leftArray[leftIndex] <= rightArray[rightIndex])
+            array[arrayIndex++] = leftArray[leftIndex++];
+        else
+            array[arrayIndex++] = rightArray[rightIndex++];
     }
 
-    // Copy the remaining elements of L[], if any
-    while (i < n1) {
-        arr[k] = L[i];
-        i++;
-        k++;
-    }
-
-    // Copy the remaining elements of R[], if any
-    while (j < n2) {
-        arr[k] = R[j];
-        j++;
-        k++;
-    }
+    if(leftIndex < leftSize)
+        array[arrayIndex++] = leftArray[leftIndex++];
+    if(rightIndex < rightSize)
+        array[arrayIndex++] = rightArray[rightIndex++];
 }
 
-// Merge Sort function
-void mergeSort(int arr[], int left, int right) {
-    if (left < right) {
-        // Same as (left + right) / 2, but avoids overflow for large left and right
-        int mid = left + (right - left) / 2;
+void mergeSort(int array[], int left, int right){
+    if(left < right){
+        int mid = (left + right) / 2;
+        mergeSort(array, left, mid);
+        mergeSort(array, mid + 1, right);
 
-        // Recursively sort the first and second halves
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-
-        // Merge the sorted halves
-        merge(arr, left, mid, right);
+        mergeArrays(array, left, mid, right);
     }
 }
 
@@ -75,14 +43,17 @@ int main() {
     int size;
     cout << "Enter the size of the array: ";
     cin >> size;
-    int arr[size], b;
-    for(int a = 0; a < size; a++){
-        cout << "Enter element " << a + 1 << ": ";
+
+    int arr[size];
+    cout << "Enter the elements of the array: ";
+    for(int a = 0; a < size; a++)
         cin >> arr[a];
-    }
+
     cout << "Original array: ";
     printArray(arr, size);
+
     mergeSort(arr, 0, size - 1);
+
     cout << "Sorted array: ";
     printArray(arr, size);
     return 0;
