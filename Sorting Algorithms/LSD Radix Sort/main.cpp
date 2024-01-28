@@ -19,8 +19,7 @@ void radixSortLSD(vector<int>& arr) {
             count[i] += count[i - 1];
         for (int i = arr.size() - 1; i >= 0; i--)
             output[--count[(arr[i] / exp) % 10]] = arr[i];
-        for (int i = 0; i < arr.size(); i++)
-            arr[i] = output[i];
+        arr = output;
     }
 }
 void printVector(const vector<int>& arr) {
@@ -33,8 +32,8 @@ int main() {
     int a, c;
     cout << "Enter the size of the array: ";
     cin >> a;
+    cout << "Enter the elements of the array: ";
     for(int b = 1; b <= a; b++){
-        cout << "Enter element " << b << ": ";
         cin >> c;
         arr.push_back(c);
     }
