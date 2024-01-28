@@ -9,7 +9,7 @@ void printArray(int array[], int size){
 
 void mergeArrays(int array[], int left, int mid, int right){
     int leftSize = mid - left + 1, rightSize = right - mid, leftArray[leftSize], rightArray[rightSize],
-        leftIndex = 0, rightIndex = 0, arrayIndex = 0;
+        leftIndex = 0, rightIndex = 0, arrayIndex = left;
 
     for(int i = 0; i < leftSize; i++)
         leftArray[i] = array[left + i];
@@ -23,9 +23,9 @@ void mergeArrays(int array[], int left, int mid, int right){
             array[arrayIndex++] = rightArray[rightIndex++];
     }
 
-    if(leftIndex < leftSize)
+    while(leftIndex < leftSize)
         array[arrayIndex++] = leftArray[leftIndex++];
-    if(rightIndex < rightSize)
+    while(rightIndex < rightSize)
         array[arrayIndex++] = rightArray[rightIndex++];
 }
 
