@@ -1,30 +1,19 @@
 #include <iostream>
-#include "Node.h"
+#include <vector>
+using namespace std;
+#include "quickSort.h"
+#include "bucketSort.h"
 
-void printVector(vector<int>& arr){
-    for(int i: arr)
-        cout << i << ' ';
-    cout << '\n';
-}
-
-void bucketSort(vector<int>& arr){
-    vector<vector<int>> buckets(10);
-    vector<int> output;
-    for(int i: arr)
-        buckets[i % 10].push_back(i);
-    for(vector<int> a: buckets)
-
-}
 
 int main(){
     vector<int> arr;
-    int a, c;
+    int size, element;
     cout << "Enter the size of the array: ";
-    cin >> a;
+    cin >> size;
     cout << "Enter the elements of the array: ";
-    for(int b = 1; b <= a; b++){
-        cin >> c;
-        arr.push_back(c);
+    for(int b = 1; b <= size; b++){
+        cin >> element;
+        arr.push_back(element);
     }
     cout << "Original array: ";
     printVector(arr);
