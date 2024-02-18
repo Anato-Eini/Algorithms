@@ -14,7 +14,7 @@ void bucketSort(vector<int>& arr){
         buckets[i % 10].push_back(i);
     for(vector<int>& bucket: buckets)
         if(!bucket.empty())
-            quickSort(bucket, 0, (int)bucket.size());
+            quickSort(bucket, 0, (int)bucket.size() - 1);
     for(vector<int> & bucket: buckets)
         if(!bucket.empty())
             for(const int &element: bucket)

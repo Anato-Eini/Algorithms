@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#include "quickSort.h"
 #include "bucketSort.h"
 
 
