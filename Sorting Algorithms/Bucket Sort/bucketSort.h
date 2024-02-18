@@ -7,19 +7,24 @@ void printVector(const vector<int>& arr){
     cout << '\n';
 }
 
-void bucketSort(vector<int>& arr){
-    vector<vector<int>> buckets(10);
-    vector<int> output;
-    for(int i: arr)
-        buckets[i % 10].push_back(i);
-    for(vector<int>& bucket: buckets)
-        if(!bucket.empty())
-            quickSort(bucket, 0, (int)bucket.size() - 1);
-    for(vector<int> & bucket: buckets)
-        if(!bucket.empty())
-            for(const int &element: bucket)
-                output.push_back(element);
+int bucketNumber(const vector<int>& arr){
+    int max = 0;
+    for (const int &i: arr) {
+        int num = i / INTERVAL;
+        if(num > max)
+            max = num;
+    }
+    return max + 1;
+}
 
+void bucketSort(vector<int>& arr){
+    vector<RedBlackTree> buckets(bucketNumber(arr));
+    vector<int> output;
+    for(int & i: arr)
+        buckets[i / INTERVAL].insert(i);
+    for(RedBlackTree rbt: buckets)
+        while (!rbt.isEmpty())
+            output.push_back(rbt.minimumValue());
     arr = output;
 }
 

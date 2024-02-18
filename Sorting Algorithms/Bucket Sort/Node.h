@@ -1,5 +1,5 @@
-#ifndef TREES_AND_HEAPS_NODE_H
-#define TREES_AND_HEAPS_NODE_H
+#ifndef ALGORITHMS_NODE_H
+#define ALGORITHMS_NODE_H
 
 struct Node{
     int value;
@@ -7,4 +7,4 @@ struct Node{
     Node *left, *right, *parent;
 };
 
-#endif //TREES_AND_HEAPS_NODE_H
+#endif //ALGORITHMS_NODE_H

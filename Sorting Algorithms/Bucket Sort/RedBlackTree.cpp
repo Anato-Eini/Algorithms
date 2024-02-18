@@ -199,62 +199,7 @@ void RedBlackTree::deleteNode(Node* node) {
     delete minimum;
 }
 
-Node* RedBlackTree::searchHelper(Node *node, int value) {
-    if(node == null || node->value == value)
-        return node;
-    else if(node->value > value)
-        return searchHelper(node->left, value);
-    else
-        return searchHelper(node->right, value);
-}
-
-Node* RedBlackTree::search(int value) {
-    return searchHelper(root, value);
-}
-
-void RedBlackTree::printTreeHelper(Node *node, string indent, bool isRight) {
-    if(node != null){
-        cout << indent;
-        if(isRight){
-            cout << "R----";
-            indent += "   ";
-        }else{
-            cout << "L----";
-            indent += "|  ";
-        }
-        cout << node->value << " (" << (node->isBlack ? "Black" : "Red") << ")\n";
-        printTreeHelper(node->left, indent, false);
-        printTreeHelper(node->right, indent, true);
-    }
-}
-
-void RedBlackTree::printTree() {
-    cout << "Size: " << size << '\n';
-    if(root != null)
-        printTreeHelper(root, "", true);
-    else
-        cout << "Tree is empty\n";
-}
-
-int RedBlackTree::treeHeight() {
-    return nodeHeight(root) + 1;
-}
-
-int RedBlackTree::nodeHeight(Node *node) {
-    if(node == null) return -1;
-    return max(nodeHeight(node->right), nodeHeight(node->left)) + 1;
-}
-
-int RedBlackTree::nodeDepth(Node *node) {
-    if(node == null) return -1;
-    return nodeDepth(node->parent) + 1;
-}
-
-Node* RedBlackTree::nullNode() {
-    return null;
-}
-
-bool RedBlackTree::isEmpty() {
+bool RedBlackTree::isEmpty() const {
     return size == 0;
 }
 

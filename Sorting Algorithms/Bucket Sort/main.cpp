@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
+#define INTERVAL 10
 using namespace std;
+#include "RedBlackTree.h"
 #include "bucketSort.h"
 
 
