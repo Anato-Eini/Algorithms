@@ -1,5 +1,3 @@
-// C++ program for the implementation
-// of MSD Radix Sort using linked list
 #include "MSDRadixSort.h"
 
 int main() {
