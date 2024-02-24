@@ -23,7 +23,7 @@ int MSDRadixSort::maxDigit(){
 }
 
 void MSDRadixSort::sortHelper(Node *node, int exponent, vector<int>& sortedArray) {
-    if(exponent < 0)
+    if(exponent <= 0)
         return;
 
     for(int i: node->array) {
@@ -36,9 +36,14 @@ void MSDRadixSort::sortHelper(Node *node, int exponent, vector<int>& sortedArray
     for(auto & i : node->next) {
         if(!i)
             continue;
-        else if(i->array.size() > 1)
-            sortHelper(i, exponent / 10, sortedArray);
-        else
+        else if(i->array.size() > 1) {
+            if(exponent > 1)
+                sortHelper(i, exponent / 10, sortedArray);
+            else {
+                sortedArray.insert(sortedArray.end(), i->array.begin(), i->array.end());
+                i->array.clear();
+            }
+        }else
             sortedArray.push_back(i->array[0]);
     }
 }
