@@ -5,7 +5,8 @@ class MSDRadixSort {
     Node* root;
     int iterator;
     static Node* createNode();
-    int maxDigit();
+    [[nodiscard]] int maxDigit() const;
+    [[nodiscard]] int minNum() const;
     void sortHelper(Node*, int, vector<int>&);
 public:
     MSDRadixSort(): root(createNode()), iterator(0){}

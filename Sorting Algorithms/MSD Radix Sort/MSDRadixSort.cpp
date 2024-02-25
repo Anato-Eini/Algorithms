@@ -12,7 +12,7 @@ void MSDRadixSort::insert(int num) {
     root->array.push_back(num);
 }
 
-int MSDRadixSort::maxDigit(){
+int MSDRadixSort::maxDigit()const{
     int max = 0;
     for(int i: root->array){
         int digit = (int)log10(i);
@@ -48,10 +48,25 @@ void MSDRadixSort::sortHelper(Node *node, int exponent, vector<int>& sortedArray
     }
 }
 
+int MSDRadixSort::minNum() const {
+    int minimum = 0;
+    for (int i: root->array)
+        if(i < minimum)
+            minimum = i;
+    return minimum;
+}
+
 void MSDRadixSort::sort() {
     vector<int> sortedArray;
+    int minimum = minNum();
+    if(minimum < 0)
+        for(int & i: root->array)
+            i -= minimum;
     sortHelper(root, (int)pow(10, maxDigit()), sortedArray);
     root->array = sortedArray;
+    if(minimum < 0)
+        for(int & i: root->array)
+            i += minimum;
 }
 
 void MSDRadixSort::print() {
