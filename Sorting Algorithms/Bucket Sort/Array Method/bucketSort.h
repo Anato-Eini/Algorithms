@@ -1,32 +1,44 @@
 #ifndef ALGORITHMS_BUCKETSORT_H
 #define ALGORITHMS_BUCKETSORT_H
-
-void printArray(int array[], int size){
-    for (int i = 0; i < size; ++i)
-        cout << array[i] << " ";
-    cout << '\n';
-}
-
-int findMin(const int arr[], int n){
-    int minimum = arr[0];
-    for (int i = 0; i < n; ++i)
-        if(arr[i] < minimum)
-            minimum = arr[i];
-    return minimum;
-}
-
-int findMax(const int arr[], int n){
-    int maximum = arr[0];
-    for (int i = 0; i < n; ++i)
-        if(maximum < arr[i])
-            maximum = arr[i];
+#include <cmath>
+#include <vector>
+#include <deque>
+#include "mergeSort.h"
+int findMax(const int array[], int size){
+    int maximum = array[0];
+    for (int i = 1; i < size; ++i)
+        if(maximum < array[i])
+            maximum = array[i];
     return maximum;
 }
 
-void bucketSort(int array[], int size){
-    int out[size], minNum = findMin(array, size);
-    if (minNum)
-
+int findMin(const int array[], int size){
+    int minimum = array[0];
+    for(int i = 1; i < size; i++)
+        if(minimum > array[i])
+            minimum = array[i];
+    return minimum;
 }
 
+void bucketSort(int array[], int size) {
+    int minimum = findMin(array, size);
+    if (minimum < 0)
+        for (int i = 0; i < size; ++i)
+            array[i] -= minimum;
+    int maximum = findMax(array, size), range = (int) ceil((double) maximum / INTERVAL) + 1, index = 0;
+    vector <deque<int>> buckets(range);
+    for (int i = 0; i < size; ++i)
+        buckets[array[i] / INTERVAL].push_back(array[i]);
+    for (deque<int> &v: buckets) {
+        mergeSort(v, 0, (int) v.size() - 1);
+        while (!v.empty()) {
+            array[index++] = v.front();
+            v.pop_front();
+        }
+    }
+
+    if(minimum < 0)
+        for (int i = 0; i < size; ++i)
+            array[i] += minimum;
+}
 #endif //ALGORITHMS_BUCKETSORT_H
