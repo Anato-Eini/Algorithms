@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cassert>
 #define INTERVAL 10
 using namespace std;
 #include "BucketSort.h"
