@@ -1,9 +1,9 @@
 #include <iostream>
+#include "RedBlackTree.h"
 #include <vector>
 #include <cmath>
 #define INTERVAL 10
 using namespace std;
-#include "RedBlackTree.h"
 #include "bucketSort.h"
 
 
@@ -13,10 +13,9 @@ int main(){
     cout << "Enter the size of the array: ";
     cin >> size;
     cout << "Enter the elements of the array: ";
-    for(int b = 1; b <= size; b++){
-        cin >> element;
-        arr.push_back(element);
-    }
+    for(int b = 1; b <= size; b++)
+        cin >> element, arr.push_back(element);
+
     cout << "Original array: ";
     printVector(arr);
     bucketSort(arr);
