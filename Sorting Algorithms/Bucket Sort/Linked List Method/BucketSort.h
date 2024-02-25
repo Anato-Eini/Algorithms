@@ -25,7 +25,7 @@ void bucketSort(vector<int>& arr){
     if(minimum < 0)
         for(int & i: arr)
             i -= minimum;
-    int maximum = findMax(arr), range = (int)ceil(maximum / INTERVAL) + 1;
+    int maximum = findMax(arr), range = (int)ceil((double) maximum / INTERVAL) + 1;
     LinkedList ** lists = new LinkedList*[range];
     for(int i = 0; i < range; i++)
         lists[i] = new LinkedList();
