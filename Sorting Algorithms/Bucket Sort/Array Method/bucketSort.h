@@ -3,7 +3,7 @@
 #include <cmath>
 #include <vector>
 #include <deque>
-#include "mergeSort.h"
+#include "heapSort.h"
 int findMax(const int array[], int size){
     int maximum = array[0];
     for (int i = 1; i < size; ++i)
@@ -30,7 +30,7 @@ void bucketSort(int array[], int size) {
     for (int i = 0; i < size; ++i)
         buckets[array[i] / INTERVAL].push_back(array[i]);
     for (deque<int> &v: buckets) {
-        mergeSort(v, 0, (int) v.size() - 1);
+        heapSort(v, (long long int)v.size());
         while (!v.empty()) {
             array[index++] = v.front();
             v.pop_front();
