@@ -21,7 +21,3 @@ int LinkedList::removeHead() {
 bool LinkedList::isEmpty() const {
     return size == 0;
 }
-
-
-
-

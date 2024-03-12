@@ -2,7 +2,10 @@
 #define ALGORITHMS_BUCKETSORT_H
 #include <vector>
 #include <cmath>
+#include <iostream>
 #include "LinkedList.h"
+
+using namespace std;
 int findMin(vector<int>& arr){
     int minimum = arr[0];
     for(const int i: arr)

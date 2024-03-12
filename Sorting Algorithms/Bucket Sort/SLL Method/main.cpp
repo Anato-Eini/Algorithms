@@ -1,6 +1,4 @@
-#include <iostream>
 #define INTERVAL 10
-using namespace std;
 #include "BucketSort.h"
 int main(){
     vector<int> arr;
