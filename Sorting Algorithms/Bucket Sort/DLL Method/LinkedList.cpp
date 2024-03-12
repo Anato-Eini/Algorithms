@@ -1,11 +1,18 @@
 #include "LinkedList.h"
 
 void LinkedList::insertNum(int num) {
-    Node* curr = head->next;
-    while(curr != tail && curr->value < num) {
-        curr = curr->next;
+    Node* curr;
+    if(abs(head->next->value - num) < abs(tail->prev->value - num)){
+        curr = head->next;
+        while(curr != tail && curr->value < num)
+            curr = curr->next;
+        addBetween(curr->prev, curr, num);
+    }else{
+        curr = tail->prev;
+        while(curr != head && curr->value > num)
+            curr = curr->prev;
+        addBetween(curr, curr->next, num);
     }
-    addBetween(curr->prev, curr, num);
     size++;
 }
 
@@ -29,7 +36,3 @@ int LinkedList::removeHead() {
 bool LinkedList::isEmpty() const {
     return size == 0;
 }
-
-
-
-
