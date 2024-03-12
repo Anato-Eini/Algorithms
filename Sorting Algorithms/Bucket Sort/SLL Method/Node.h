@@ -3,7 +3,7 @@
 
 struct Node{
     int value;
-    Node* prev, *next;
+    Node *next;
 };
 
 #endif //ALGORITHMS_NODE_H
