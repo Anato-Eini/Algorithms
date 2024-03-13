@@ -38,6 +38,9 @@ void bucketSort(vector<int>& arr){
         for(int & i: out)
             i += minimum;
     arr = out;
+    for(int i = 0; i < range; i++)
+        delete lists[i];
+    delete[] lists;
 }
 
 void printVector(const vector<int>& arr){
