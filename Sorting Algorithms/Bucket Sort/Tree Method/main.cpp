@@ -8,14 +8,13 @@ using namespace std;
 
 
 int main(){
-    vector<int> arr;
-    int size, element;
+    int size;
     cout << "Enter the size of the array: ";
     cin >> size;
+    vector<int> arr(size);
     cout << "Enter the elements of the array: ";
-    for(int b = 1; b <= size; b++)
-        cin >> element, arr.push_back(element);
-
+    for(int & i: arr)
+        cin >> i;
     cout << "Original array: ";
     printVector(arr);
     bucketSort(arr);

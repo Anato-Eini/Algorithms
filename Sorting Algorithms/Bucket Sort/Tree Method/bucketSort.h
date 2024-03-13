@@ -32,7 +32,8 @@ void bucketSort(vector<int>& arr){
             i -= minimum;
     vector<RedBlackTree> buckets(bucketNumber(arr));
     vector<int> output;
-    for(int & i: arr)
+
+    for(int i: arr)
         buckets[i / INTERVAL].insert(i);
     for(RedBlackTree rbt: buckets)
         while (!rbt.isEmpty())
