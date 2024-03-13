@@ -2,11 +2,10 @@
 #define ALGORITHMS_BUCKETSORT_H
 #include <cmath>
 #include <thread>
-#include <cassert>
+#include <functional>
 #include "heapSort.h"
 
-typedef long long int ll;
-int findMax(const int array[], ll size){
+int findMax(const int array[], int size){
     int maximum = array[0];
     for (int i = 1; i < size; ++i)
         if(maximum < array[i])
@@ -14,7 +13,7 @@ int findMax(const int array[], ll size){
     return maximum;
 }
 
-int findMin(const int array[], ll size){
+int findMin(const int array[], int size){
     int minimum = array[0];
     for(int i = 1; i < size; i++)
         if(minimum > array[i])
@@ -22,34 +21,37 @@ int findMin(const int array[], ll size){
     return minimum;
 }
 
-void worker(vector<deque<int>> &arr, ll start, ll end) {
+void worker(vector<deque<int>> &arr, int start, int end) {
     for(; start <= end; start++)
         if (!arr[start].empty())
             heapSort(arr[start], arr[start].size());
 }
 
-void bucketSort(int array[], ll size, int & threads) {
-    thread thrd[threads];
+void bucketSort(int array[], int size, int & threads) {
 
     int minimum = findMin(array, size);
     if (minimum < 0)
         for (int i = 0; i < size; ++i)
             array[i] -= minimum;
 
-    ll maximum = findMax(array, size), range = (ll) ceil((double) maximum / INTERVAL) + 1, index = 0;
+    int maximum = findMax(array, size), range = (maximum + INTERVAL) / INTERVAL, index = 0;
 
     vector <deque<int>> buckets(range);
-    for (ll i = 0; i < size; ++i)
+    for (int i = 0; i < size; ++i)
         buckets[array[i] / INTERVAL].push_back(array[i]);
 
-    ll interval = range / threads;
-    for(int i = 0; i < threads; i++)
-        thrd[i] = thread(worker, ref(buckets), interval * i + 1,
-                           i == threads - 1 ? buckets.size() - 1 : interval * (i + 1));
+
+    int interval = (range + threads - 1) / threads;
+    thread thrd[threads];
+    for(int i = 0; i < threads; i++) {
+        int start = interval * i, end = min(start + interval - 1, range - 1);
+        thrd[i] = thread([&buckets, start, end] {
+            return worker(buckets, start, end);
+        });
+    }
 
     for(int i = 0; i < threads; i++)
-        if (thrd[i].joinable())
-            thrd[i].join();
+        thrd[i].join();
 
     for(deque<int> d: buckets){
         while(!d.empty()){
