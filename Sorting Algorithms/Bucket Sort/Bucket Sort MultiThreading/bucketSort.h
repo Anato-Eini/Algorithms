@@ -45,7 +45,7 @@ void bucketSort(int array[], int size, int & threads) {
     thread thrd[threads];
     for(int i = 0; i < threads; i++) {
         int start = interval * i, end = min(start + interval - 1, range - 1);
-        thrd[i] = thread([&buckets, start, end] {
+        thrd[i] = thread([&buckets, start, end]() -> void {
             return worker(buckets, start, end);
         });
     }
