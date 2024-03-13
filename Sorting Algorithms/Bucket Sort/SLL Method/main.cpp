@@ -1,15 +1,13 @@
 #define INTERVAL 10
 #include "BucketSort.h"
 int main(){
-    vector<int> arr;
     int size, element;
     cout << "Enter the size of the array: ";
     cin >> size;
     cout << "Enter the elements of the array: ";
-    for(int b = 1; b <= size; b++){
-        cin >> element;
-        arr.push_back(element);
-    }
+    vector<int> arr(size);
+    for(int & i: arr)
+        cin >> i;
     cout << "Original array: ";
     printVector(arr);
     bucketSort(arr);
