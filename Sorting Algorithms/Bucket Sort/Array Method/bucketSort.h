@@ -25,12 +25,15 @@ void bucketSort(int array[], int size) {
     if (minimum < 0)
         for (int i = 0; i < size; ++i)
             array[i] -= minimum;
+
     int maximum = findMax(array, size), range = (int) ceil((double) maximum / INTERVAL) + 1, index = 0;
     vector <deque<int>> buckets(range);
+
     for (int i = 0; i < size; ++i)
         buckets[array[i] / INTERVAL].push_back(array[i]);
+
     for (deque<int> &v: buckets) {
-        heapSort(v, (long long int)v.size());
+        heapSort(v, v.size());
         while (!v.empty()) {
             array[index++] = v.front();
             v.pop_front();
