@@ -3,7 +3,7 @@
 
 void shellSort(int array[], int size){
     for(int gap = size / 2; gap > 0; gap /= 2)
-        for(int i = gap; i < size; i += gap)
+        for(int i = gap; i < size; i++)
             if(array[i] < array[i - gap]) {
                 int j, temp = array[i];
                 for (j = i - gap; j >= 0; j -= gap) {
