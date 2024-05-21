@@ -3,7 +3,12 @@ project(Algorithms)
 
 set(CMAKE_CXX_STANDARD 26)
 
-add_executable(Djisktras_Algorithm
+add_executable(Dijkstra_Algorithm
+        "Dijkstra’s Algorithm/General Graph/GraphAbstract.h"
+        "Dijkstra’s Algorithm/Adjacency Matrix/AdjacencyMatrix.h"
+        "Dijkstra’s Algorithm/General Graph/GraphAbstract.cpp"
+        "Dijkstra’s Algorithm/Adjacency Matrix/AdjacencyMatrix.cpp"
+        "Dijkstra’s Algorithm/dijkstra.h"
         "Dijkstra’s Algorithm/main.cpp"
 )
 
