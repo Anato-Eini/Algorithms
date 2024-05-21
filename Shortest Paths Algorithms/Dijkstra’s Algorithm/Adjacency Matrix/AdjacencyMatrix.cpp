@@ -1,3 +1,6 @@
+#ifndef ADJACENCYMATRIX_CPP
+#define ADJACENCYMATRIX_CPP
+
 #include "AdjacencyMatrix.h"
 
 namespace Graph {
@@ -75,44 +78,35 @@ namespace Graph {
     }
 
     template<typename V, typename E>
-    GraphAbstract<V, E> &AdjacencyMatrix<V, E>::addVertex(const V &vertex) {
+    void AdjacencyMatrix<V, E>::addVertex(const V &vertex) {
         if (containVertex(vertex))
             throw std::logic_error(vertex + " vertex already exists\n");
         matrix[vertex] = {};
         for (std::pair<const V, std::unordered_map<V, E>> &row: matrix)
             matrix[vertex][row.first] = row.second[vertex] = {};
-
-        return *this;
     }
 
     template<typename V, typename E>
-    GraphAbstract<V, E> &AdjacencyMatrix<V, E>::addEdge(const E &edge, const V &vertex1, const V &vertex2) {
+    void AdjacencyMatrix<V, E>::addEdge(const E &edge, const V &vertex1, const V &vertex2) {
         matrix[vertex2][vertex1] = matrix[vertex1][vertex2] = edge;
-        return *this;
     }
 
     template<typename V, typename E>
-    GraphAbstract<V, E> &AdjacencyMatrix<V, E>::removeVertex(const V &vertex) {
+    void AdjacencyMatrix<V, E>::removeVertex(const V &vertex) {
         if (!containVertex(vertex))
             throw std::logic_error(vertex + " vertex doesn't exist\n");
         matrix.erase(vertex);
         for (std::pair<const V, std::unordered_map<V, E>> &row: matrix)
             row.second.erase(vertex);
-
-        return *this;
     }
 
     template<typename V, typename E>
-    GraphAbstract<V, E> &AdjacencyMatrix<V, E>::removeEdge(const E &edge) {
+    void AdjacencyMatrix<V, E>::removeEdge(const E &edge) {
         for (std::pair<const V, std::unordered_map<V, E>> &row: matrix)
             for (std::pair<const V, E> &cell: row.second)
-                if (cell.second == edge) {
+                if (cell.second == edge)
                     matrix[cell.first][row.first] = matrix[row.first][cell.first] = {};
-                    return *this;
-                }
         throw std::logic_error(edge + " edge doesn't exist\n");
-
-        return *this;
     }
 
     template<typename V, typename E>
@@ -152,7 +146,7 @@ namespace Graph {
     }
 
     template<typename V, typename E>
-    GraphAbstract<V, E> &AdjacencyMatrix<V, E>::print(std::ostream &ostream) {
+    void AdjacencyMatrix<V, E>::print(std::ostream &ostream) {
         //For printing elements in unordered_map by order ;
         std::vector<V> vertices;
         for (const std::pair<const V, std::unordered_map<V, E>> &row: matrix) {
@@ -166,7 +160,7 @@ namespace Graph {
                 ostream << matrix[vertex1][vertex2] << '\t';
             ostream << '\n';
         }
-
-        return *this;
     }
 }
+
+#endif

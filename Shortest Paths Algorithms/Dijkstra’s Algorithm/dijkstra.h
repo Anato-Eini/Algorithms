@@ -6,9 +6,7 @@
 #include <climits>
 
 #include "Adjacency Matrix/AdjacencyMatrix.h"
-#include "Adjacency Matrix/AdjacencyMatrix.cpp"
 
-template <typename V, typename E>
 size_t minDistance(std::vector<size_t> &distances, std::vector<bool> &visited){
     size_t min = SIZE_MAX, minIndex, size = distances.size();
 
@@ -19,10 +17,14 @@ size_t minDistance(std::vector<size_t> &distances, std::vector<bool> &visited){
 }
 
 template <typename V, typename E>
-void dijkstra(Graph::GraphAbstract<V, E>& graph, V vertex) {
+void dijkstra(Graph::AdjacencyMatrix<V, E>& graph, V vertex) {
     size_t numVertex = graph.numVertices(), indexOf;
 
     std::vector<V> vertices = graph.vertices();
+    for(V v: vertices)
+        std::cout << v << '\n';
+
+
 
     std::vector<size_t> distances(numVertex - 1, SIZE_MAX);
     std::vector<bool> visited(numVertex - 1, false);
@@ -34,7 +36,7 @@ void dijkstra(Graph::GraphAbstract<V, E>& graph, V vertex) {
     distances[indexOf] = 0;
 
     for(size_t i = 0; i < numVertex - 1; i++) {
-        size_t minIndex = minDistance<V, E>(distances, visited);
+        size_t minIndex = minDistance(distances, visited);
 
         std::cout << " -> " << vertices[minIndex];
         visited[minIndex] = true;

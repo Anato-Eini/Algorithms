@@ -2,14 +2,24 @@
 
 int main() {
     Graph::AdjacencyMatrix<char, int> g;
-    g.addVertex('A').addVertex('B').addVertex('C').addVertex('D').addVertex('E')
-        .addVertex('F').addVertex('G');
+    g.addVertex('A');
+    g.addVertex('B');
+    g.addVertex('C');
+    g.addVertex('D');
+    g.addVertex('E');
+    g.addVertex('F');
+    g.addVertex('G');
 
-    g.addEdge(4, 'D', 'A').addEdge(2, 'D', 'E')
-        .addEdge(3, 'A', 'C').addEdge(4, 'A', 'E')
-        .addEdge(4, 'E', 'C').addEdge(5, 'E', 'G')
-        .addEdge(5, 'C', 'F').addEdge(2, 'B', 'C')
-        .addEdge(2, 'B', 'F').addEdge(5, 'G', 'F');
+    g.addEdge(4, 'D', 'A');
+    g.addEdge(2, 'D', 'E');
+    g.addEdge(3, 'A', 'C');
+    g.addEdge(4, 'A', 'E');
+    g.addEdge(4, 'E', 'C');
+    g.addEdge(5, 'E', 'G');
+    g.addEdge(5, 'C', 'F');
+    g.addEdge(2, 'B', 'C');
+    g.addEdge(2, 'B', 'F');
+    g.addEdge(5, 'G', 'F');
 
 //    add_edge(g, 3, 0, 4); // D -> A, weight 4
 //    add_edge(g, 3, 4, 2); // D -> E, weight 2
