@@ -45,7 +45,7 @@ namespace Graph {
             throw std::logic_error(vertex + " vertex doesn't exist\n");
         std::vector<E> edges;
         for (const std::pair<const V, E> &cell: matrix[vertex])
-            if (cell.second != 0)
+            if (cell.second != (E){})
                 edges.push_back(cell.second);
         return edges;
     }
@@ -70,7 +70,7 @@ namespace Graph {
             throw std::logic_error(vertex + " vertex doesn't exist\n");
         std::vector<V> vertices;
         for (const std::pair<const V, E> &row: matrix[vertex])
-            if (row.second != 0)
+            if (row.second != (E) {})
                 vertices.push_back(row.first);
         return vertices;
     }
@@ -89,6 +89,7 @@ namespace Graph {
     template<typename V, typename E>
     GraphAbstract<V, E> &AdjacencyMatrix<V, E>::addEdge(const E &edge, const V &vertex1, const V &vertex2) {
         matrix[vertex2][vertex1] = matrix[vertex1][vertex2] = edge;
+
         return *this;
     }
 
