@@ -21,7 +21,7 @@ namespace Graph {
 
     template<typename V, typename E>
     class GraphAbstract {
-        virtual GraphAbstract &print(std::ostream &) = 0;
+        virtual void print(std::ostream &) = 0;
 
     public:
         virtual std::vector<V> vertices() const = 0;
@@ -40,14 +40,14 @@ namespace Graph {
         virtual std::vector<V> opposite(const V &vertex) = 0;
 
         ///Must be unique
-        virtual GraphAbstract &addVertex(const V &vertex) = 0;
+        virtual void addVertex(const V &vertex) = 0;
 
         ///Must be unique
-        virtual GraphAbstract &addEdge(const E &edge, const V &vertex1, const V &vertex2) = 0;
+        virtual void addEdge(const E &edge, const V &vertex1, const V &vertex2) = 0;
 
-        virtual GraphAbstract &removeVertex(const V &vertex) = 0;
+        virtual void removeVertex(const V &vertex) = 0;
 
-        virtual GraphAbstract &removeEdge(const E &edge) = 0;
+        virtual void removeEdge(const E &edge) = 0;
 
         virtual bool containEdge(const E &edge) const = 0;
 
