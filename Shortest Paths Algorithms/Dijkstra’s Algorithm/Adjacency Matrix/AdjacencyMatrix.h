@@ -14,7 +14,7 @@ namespace Graph {
         */
         std::unordered_map<V, std::unordered_map<V, E>> matrix;
 
-        void print(std::ostream &ostream) override;
+        GraphAbstract<V, E> &print(std::ostream &ostream) override;
 
     public:
         std::vector<V> vertices() const override;
@@ -31,13 +31,13 @@ namespace Graph {
 
         std::vector<V> opposite(const V &vertex) override;
 
-        void addVertex(const V &vertex) override;
+        GraphAbstract<V, E> &addVertex(const V &vertex) override;
 
-        void addEdge(const E &edge, const V &vertex1, const V &vertex2) override;
+        GraphAbstract<V, E> &addEdge(const E &edge, const V &vertex1, const V &vertex2) override;
 
-        void removeVertex(const V &vertex) override;
+        GraphAbstract<V, E> &removeVertex(const V &vertex) override;
 
-        void removeEdge(const E &edge) override;
+        GraphAbstract<V, E> &removeEdge(const E &edge) override;
 
         bool containEdge(const E &edge) const override;
 
