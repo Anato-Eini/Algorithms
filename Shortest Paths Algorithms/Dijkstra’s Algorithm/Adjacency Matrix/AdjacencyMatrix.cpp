@@ -1,3 +1,5 @@
+#ifndef DATA_STRUCTURES_ADJACENCYMATRIX_CPP
+#define DATA_STRUCTURES_ADJACENCYMATRIX_CPP
 #include "AdjacencyMatrix.h"
 
 namespace Graph {
@@ -19,7 +21,6 @@ namespace Graph {
             for (const std::pair<const V, E> &column: row.second)
                 if (!edgeSet.contains(column.second))
                     edgeSet.insert(column.second);
-        edgeSet.erase({});
         std::transform(edgeSet.begin(), edgeSet.end(), std::back_inserter(arrOfEdges),
                        [](const E &e) -> E { return e; });
         return arrOfEdges;
@@ -44,7 +45,7 @@ namespace Graph {
             throw std::logic_error(vertex + " vertex doesn't exist\n");
         std::vector<E> edges;
         for (const std::pair<const V, E> &cell: matrix[vertex])
-            if (!cell.second == 0)
+            if (cell.second != 0)
                 edges.push_back(cell.second);
         return edges;
     }
@@ -69,7 +70,7 @@ namespace Graph {
             throw std::logic_error(vertex + " vertex doesn't exist\n");
         std::vector<V> vertices;
         for (const std::pair<const V, E> &row: matrix[vertex])
-            if (!row.second == 0)
+            if (row.second != 0)
                 vertices.push_back(row.first);
         return vertices;
     }
@@ -170,3 +171,5 @@ namespace Graph {
         return *this;
     }
 }
+
+#endif

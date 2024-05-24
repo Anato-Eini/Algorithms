@@ -8,13 +8,14 @@
 #include "Adjacency Matrix/AdjacencyMatrix.h"
 #include "Adjacency Matrix/AdjacencyMatrix.cpp"
 
-template <typename V, typename E>
 size_t minDistance(std::vector<size_t> &distances, std::vector<bool> &visited){
     size_t min = SIZE_MAX, minIndex, size = distances.size();
 
-    for(minIndex = 0; minIndex < size; minIndex++)
-        if(!visited[minIndex] && distances[minIndex] < min)
-            min = distances[minIndex];
+    for(int i = 0; i < size; i++)
+        if(!visited[i] && distances[i] < min) {
+            min = distances[i];
+            minIndex = i;
+        }
     return minIndex;
 }
 
@@ -33,16 +34,23 @@ void dijkstra(Graph::GraphAbstract<V, E>& graph, V vertex) {
 
     distances[indexOf] = 0;
 
-    for(size_t i = 0; i < numVertex - 1; i++) {
-        size_t minIndex = minDistance<V, E>(distances, visited);
+    bool isFirst = true; //For printing arrows
 
-        std::cout << " -> " << vertices[minIndex];
+    for(size_t i = 0; i < numVertex - 1; i++) {
+        size_t minIndex = minDistance(distances, visited);
+
+        if(isFirst)
+            isFirst = false;
+        else
+            std::cout << " -> ";
+
+        std::cout << vertices[minIndex];
         visited[minIndex] = true;
 
         for (size_t j = 0; j < numVertex; j++)
             if (!visited[j] && graph.getEdge(vertices[minIndex], vertices[j])
-                && distances[j] < distances[minIndex] + graph.getEdge(distances[minIndex], distances[j]))
-                distances[j] = distances[minIndex] + graph.getEdge(distances[minIndex], distances[j]);
+                && distances[j] > distances[minIndex] + graph.getEdge(vertices[minIndex], vertices[j]))
+                distances[j] = distances[minIndex] + graph.getEdge(vertices[minIndex], vertices[j]);
     }
 }
 
