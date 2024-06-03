@@ -22,4 +22,9 @@ add_executable(Prim-Jarnik_Algorithm
 
 add_executable(Kruskals_Algorithm
         "Kruskal’s Algorithm/main.cpp"
+        "Kruskal’s Algorithm/kruskal.h"
+        "Kruskal’s Algorithm/General Graph/GraphAbstract.h"
+        "Kruskal’s Algorithm/Edge List/EdgeList.cpp"
+        "Kruskal’s Algorithm/General Graph/GraphAbstract.cpp"
+        "Kruskal’s Algorithm/Edge List/EdgeList.h"
 )
