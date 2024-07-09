@@ -12,10 +12,6 @@ add_executable(Dijkstra_Algorithm
         "Dijkstra’s Algorithm/main.cpp"
 )
 
-add_executable(Minimum_Spanning_Trees
-        "Minimum Spanning Trees/main.cpp"
-)
-
 add_executable(Prim-Jarnik_Algorithm
         "Prim-Jarnik Algorithm/main.cpp"
 )
